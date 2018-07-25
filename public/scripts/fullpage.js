@@ -37,10 +37,6 @@ function loaded(){
     $('.section').removeClass('d-none').addClass('animated fadeIn');
     // $('.load-wrapper').addClass('animated fadeOut');
 
-    $('.button').on('click', function(){
-        cycleWhoAreWe();
-    });
-
     $('#fullpage').fullpage({
         //Navigation
         menu: '#menu',
@@ -100,31 +96,6 @@ function loaded(){
             hideScrollIndicator();
         },
         afterLoad: function(anchorLink, index){
-            if(anchorLink == 'jeugd-juridisch-advies'){
-                logoAnimation();
-                changeAnbiStyling('home');
-        	}
-            if(anchorLink == 'waar-helpen-we-mee'){
-                if(!startedLoaderQuoteCycling){
-                    startQuoteCycling();
-                    startedLoaderQuoteCycling = true;
-                }
-                revealScrollIndicator('scroll-quotes');
-                changeAnbiStyling('quotes');
-        	}
-            if(anchorLink == 'wie-zijn-wij'){
-                if(!isRevealedInitialWhoAreWeAnimation){
-                    $('.paragraph').first().removeClass(hidden);
-                    $('.image-render').first().removeClass(hidden).addClass('fadeInUp');
-                    isRevealedInitialWhoAreWeAnimation = true;
-                }
-                revealScrollIndicator('who-are-we');
-                changeAnbiStyling('who-are-we');
-        	}
-            if(anchorLink == 'contact'){
-                phoneAnimation();
-                changeAnbiStyling('contact');
-        	}
         }
     });
 }
@@ -172,4 +143,12 @@ function animate(selector, animationToAdd, classToRemove, duration, wait, onComp
         element.removeClass(classToRemove).addClass(animationToAdd);
     }, delay);
 
+}
+
+function on() {
+    $('.menu-overlay').removeClass('invisible').removeClass('no-pointer-events');
+}
+
+function off() {
+    $('.menu-overlay').addClass('invisible').addClass('no-pointer-events');
 }

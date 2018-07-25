@@ -6,9 +6,13 @@
     </head>
     <body>
         <!-- start of the page content -->
+        <img class="col-1" src="{{ asset('/assets/optimised/menu.svg') }}" style="z-index: 2; position: fixed; top: 15px; right: 15px; cursor: pointer;" onclick="on()">
+        @include('partials.menu-overlay')
         <div class="container-fluid">
-            <div class="row" id="fullpage" style="height: 100vh; width: 100%; margin: 0; padding: 0;">
-                @yield('content')
+            <div class="row" style="height: 100vh; width: 100%; ;">
+                <div id="fullpage" style="height: 100vh; width: 100vw;">
+                    @yield('content')
+                </div>
             </div>
         </div>
         @include('scripts')

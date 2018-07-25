@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('partials.sections');
-});
+Route::get('/', 'MicksartController@index');
 
 
 Route::group(['prefix' => 'admin'], function () {
