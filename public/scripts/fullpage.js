@@ -96,8 +96,21 @@ function loaded(){
             hideScrollIndicator();
         },
         afterLoad: function(anchorLink, index){
+            if(anchorLink === 'gallerij'){
+                revealWorks(worksIndex);
+            }
         }
     });
+}
+
+var worksIndex = 0;
+function revealWorks(index){
+    console.log(index);
+    $(document.getElementsByClassName('first-work')[index]).removeClass('invisible');
+    $(document.getElementsByClassName("second-work")[index]).removeClass('invisible');
+    $(document.getElementsByClassName("third-work")[index]).removeClass('invisible');
+    $(document.getElementsByClassName("fourth-work")[index]).removeClass('invisible');
+    $(document.getElementsByClassName("fifth-work")[index]).removeClass('invisible');
 }
 
 function hideScrollIndicator(){

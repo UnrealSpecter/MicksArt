@@ -1,3 +1,23 @@
+@font-face {
+    font-family: kino;
+    src: url('/assets/png/kino.ttf');
+}
+
+.kino {
+    font-family: kino;
+}
+
+.background {
+    z-index: 1;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 /* Menu Overlay */
 .no-pointer-events {
     pointer-events: none;
@@ -92,5 +112,5 @@
     width: 30.5vw;
     position: absolute;
     left: 34.9%;
-    bottom: 25%;
+    bottom: 29%;
 }
