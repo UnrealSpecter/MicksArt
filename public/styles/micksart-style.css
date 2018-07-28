@@ -52,55 +52,72 @@
 
 /*  HOME */
 
+/* OVERLAY */
+.hover-information {
+    background-color: black;
+    z-index: 3;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.75em;
+    text-align: center;
+    position: fixed;
+    height: 25%;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    padding: 0 7.5% 0 7.5%;
+    hyphens: auto;
+}
+
 /* WORKS */
 .first-work {
     width: 13vw;
-    height: 35vh;
+    height: 32vh;
     background-color: red;
     z-index: 2;
     position: absolute;
-    left: 11.5%;
-    bottom: 24%;
+    left: 11.75%;
+    bottom: 31%;
 }
 
 .second-work {
     width: 12.75vw;
-    height: 35vh;
+    height: 32vh;
     background-color: red;
     z-index: 2;
     position: absolute;
     left: 28.9%;
-    bottom: 24%;
+    bottom: 31%;
 }
 
 .third-work {
     width: 12.6vw;
-    height: 35vh;
+    height: 32vh;
     background-color: red;
     z-index: 2;
     position: absolute;
     left: 44.6%;
-    bottom: 24%;
+    bottom: 31%;
 }
 
 .fourth-work {
     width: 12.6vw;
-    height: 35vh;
+    height: 32vh;
     background-color: red;
     z-index: 2;
     position: absolute;
     left: 61%;
-    bottom: 24%;
+    bottom: 31%;
 }
 
 .fifth-work {
     width: 12.6vw;
-    height: 35vh;
+    height: 32vh;
     background-color: red;
     z-index: 2;
     position: absolute;
     right: 9.8%;
-    bottom: 24%;
+    bottom: 31%;
 }
 
 /* HALL OF FAME */

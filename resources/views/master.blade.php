@@ -6,7 +6,8 @@
     </head>
     <body>
         <!-- start of the page content -->
-        <img class="col-1" src="{{ asset('/assets/optimised/menu.svg') }}" style="z-index: 2; position: fixed; top: 15px; right: 15px; cursor: pointer;" onclick="on()">
+        <img class="col-1" src="{{ asset('/assets/png/menu.svg') }}" style="z-index: 2; position: fixed; top: 15px; right: 15px; cursor: pointer;" onclick="on()">
+        @include('partials.hover-information')
         @include('partials.menu-overlay')
         <div class="container-fluid">
             <div class="row" style="height: 100vh; width: 100%; ;">

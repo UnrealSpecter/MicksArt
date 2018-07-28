@@ -97,21 +97,58 @@ function loaded(){
         },
         afterLoad: function(anchorLink, index){
             if(anchorLink === 'gallerij'){
-                revealWorks(worksIndex);
+                revealWorks('next');
             }
         }
     });
 }
 
 var worksIndex = 0;
-function revealWorks(index){
-    console.log(index);
-    $(document.getElementsByClassName('first-work')[index]).removeClass('invisible');
-    $(document.getElementsByClassName("second-work")[index]).removeClass('invisible');
-    $(document.getElementsByClassName("third-work")[index]).removeClass('invisible');
-    $(document.getElementsByClassName("fourth-work")[index]).removeClass('invisible');
-    $(document.getElementsByClassName("fifth-work")[index]).removeClass('invisible');
+$('.arrow-left, .arrow-right').on('click', function(){
+    revealWorks($(this).data('direction'));
+});
+
+function revealWorks(direction){
+
+    console.log(direction);
+
+    $(document.getElementsByClassName('first-work')[worksIndex]).removeClass('invisible');
+    $(document.getElementsByClassName("second-work")[worksIndex]).removeClass('invisible');
+    $(document.getElementsByClassName("third-work")[worksIndex]).removeClass('invisible');
+    $(document.getElementsByClassName("fourth-work")[worksIndex]).removeClass('invisible');
+    $(document.getElementsByClassName("fifth-work")[worksIndex]).removeClass('invisible');
 }
+
+// DISPLAY WORK OR ARIST INFORMATION
+$('.work').on('mouseenter', function(){
+    setHoverInformation(this);
+});
+
+$('.artist').on('mouseenter', function(){
+    setHoverInformation(this);
+});
+
+$('.work').on('mouseout', function() {
+    animate('hover-information', 'fadeOut', 'fadeIn');
+});
+
+$('.artist').on('mouseout', function() {
+    animate('hover-information', 'fadeOut', 'fadeIn');
+});
+
+//set hover box information
+function setHoverInformation(element){
+    var container = $('.hover-information');
+    if($(element).data('title')){
+        $('.title').text($(element).data('title'));
+        $('.artist').text($(element).data('artist'));
+    }
+    else {
+        $('.title').text($(element).data('name'));
+    }
+    animate('hover-information', 'fadeIn', 'invisible fadeOut');
+}
+
 
 function hideScrollIndicator(){
     $('.scroll-indicator').not(hidden).addClass(hidden);
@@ -134,34 +171,24 @@ function playSectionBounceIntro(section){
     }, 1500);
 }
 
-//animate event to make animating stuff easier
-function animate(selector, animationToAdd, classToRemove, duration, wait, onCompleteClassAdd) {
-
-    var element, delay;
-    wait ? delay = wait : delay = 0;
-    selector instanceof jQuery ? element = selector : element = $('.' + selector);
-
-    //remove existing animations and reset to a baseline
-    $.each(animationTypes, function(index, type){
-        if(element.hasClass(type)){
-            $.each(animations, function(index, animation){
-                element.removeClass(type).removeClass(animation);
-            });
-        }
-    });
-
-    // if there are miliseconds specified wait before applying the animation
-    duration ? element.addClass(duration) : element.addClass('animated');
-    setTimeout(function(){
-        element.removeClass(classToRemove).addClass(animationToAdd);
-    }, delay);
-
-}
-
+// MENU OVERLAY ON/OFF
 function on() {
     $('.menu-overlay').removeClass('invisible').removeClass('no-pointer-events');
 }
 
 function off() {
     $('.menu-overlay').addClass('invisible').addClass('no-pointer-events');
+}
+
+//simple animate function to make animating easier and remove user errors like appending the correct classes
+function animate(element, animationToAdd, animationToRemove, delay) {
+
+    //check if the animated class is available.
+    if(!$('.' + element).hasClass('animated')){
+        $('.' + element).addClass('animated');
+    }
+
+    //on the elment remove the desired animation that needs to be removed and add the new one
+    $('.' + element).removeClass(animationToRemove).addClass(animationToAdd);
+
 }
