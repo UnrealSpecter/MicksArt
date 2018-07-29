@@ -27,8 +27,6 @@ class MicksartController extends Controller
             'artists' => $artists
         ];
 
-        // dd($viewData);
-
         return view('partials.sections')->with($viewData);
     }
 }

@@ -96,27 +96,91 @@ function loaded(){
             hideScrollIndicator();
         },
         afterLoad: function(anchorLink, index){
-            if(anchorLink === 'gallerij'){
+            if(anchorLink === 'gallerij' && !initialWorksRevealed){
+                revealWorks('next');
+            }
+            if(anchorLink === 'hall-of-fame' && !initialArtistsRevealed){
                 revealWorks('next');
             }
         }
     });
 }
 
-var worksIndex = 0;
 $('.arrow-left, .arrow-right').on('click', function(){
-    revealWorks($(this).data('direction'));
+    var direction = $(this).data('direction');
+    var currentPage = $(this).data('page');
+
+    if(currentPage === 'works'){
+        revealWorks(direction);
+    } else {
+        revealArtists(direction);
+    }
 });
 
+// COUNTERS
+var worksIndex = 0;
+var works = document.getElementsByClassName('first-work').length;
+var initialWorksRevealed = false;
+
 function revealWorks(direction){
+    if(initialWorksRevealed){
+        console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
+        if(direction === 'next' && (worksIndex < (works - 1))){
+            toggleWorks();
+            worksIndex++;
+            toggleWorks();
+        }
+        if(direction === 'previous' && worksIndex >= 1){
+            toggleWorks();
+            worksIndex--;
+            toggleWorks();
+        }
+    }
+    else {
+        toggleWorks();
+        initialWorksRevealed = true;
+    }
+}
 
-    console.log(direction);
+var artistsIndex = 0;
+var artists = document.getElementsByClassName('first-artist').length;
+var initialArtistsRevealed = false;
 
-    $(document.getElementsByClassName('first-work')[worksIndex]).removeClass('invisible');
-    $(document.getElementsByClassName("second-work")[worksIndex]).removeClass('invisible');
-    $(document.getElementsByClassName("third-work")[worksIndex]).removeClass('invisible');
-    $(document.getElementsByClassName("fourth-work")[worksIndex]).removeClass('invisible');
-    $(document.getElementsByClassName("fifth-work")[worksIndex]).removeClass('invisible');
+function revealArtists(direction){
+    if(initialArtistsRevealed){
+        console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
+        if(direction === 'next' && (artistsIndex < (artists - 1))){
+            toggleArtists();
+            artistsIndex++;
+            toggleArtists();
+        }
+        if(direction === 'previous' && artistsIndex >= 1){
+            toggleArtists();
+            artistsIndex--;
+            toggleArtists();
+        }
+    }
+    else {
+        console.log('initial');
+        toggleArtists();
+        initialArtistsRevealed = true;
+    }
+}
+
+function toggleWorks(){
+    $(document.getElementsByClassName("first-work")[worksIndex]).toggle();
+    $(document.getElementsByClassName("second-work")[worksIndex]).toggle();
+    $(document.getElementsByClassName("third-work")[worksIndex]).toggle();
+    $(document.getElementsByClassName("fourth-work")[worksIndex]).toggle();
+    $(document.getElementsByClassName("fifth-work")[worksIndex]).toggle();
+}
+
+function toggleArtists(){
+    $(document.getElementsByClassName("first-artist")[artistsIndex]).toggle();
+    $(document.getElementsByClassName("second-artist")[artistsIndex]).toggle();
+    $(document.getElementsByClassName("third-artist")[artistsIndex]).toggle();
+    $(document.getElementsByClassName("fourth-artist")[artistsIndex]).toggle();
+    $(document.getElementsByClassName("fifth-fifth")[artistsIndex]).toggle();
 }
 
 // DISPLAY WORK OR ARIST INFORMATION
@@ -144,7 +208,7 @@ function setHoverInformation(element){
         $('.artist').text($(element).data('artist'));
     }
     else {
-        $('.title').text($(element).data('name'));
+        $('.title').text($(element).data('artist'));
     }
     animate('hover-information', 'fadeIn', 'invisible fadeOut');
 }
