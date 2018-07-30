@@ -13,6 +13,15 @@
   animation-fill-mode: both;
 }
 
+.animated-slow {
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+
+.animated-slow.infinite {
+    animation-iteration-count: infinite;
+}
+
 .animated.infinite {
   animation-iteration-count: infinite;
 }
