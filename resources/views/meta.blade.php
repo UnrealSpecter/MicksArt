@@ -4,6 +4,6 @@
 
     <meta name="description" content="project-code-base">
 
-    <!-- <link rel="icon" type="image/png" href=""> -->
+    <link rel="icon" type="image/png" href="{{ asset('/assets/png/logo.png') }}">
 
     <title>@yield('title')</title>

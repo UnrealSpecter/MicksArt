@@ -4,22 +4,42 @@
         @if($index % 5 === 0)
         <div class="work first-work" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}">
             <img src="{{ url('/storage') }}/{{ $work->image_path }}" style="height: 100%; width: 100%;">
+            <div class="d-flex flex-column align-items-center justify-content-center work-information">
+                <span class="work-text animated fadeInUp d-none">{{ $work->title }}</span>
+                <span class="work-text animated fadeInUp d-none">{{ $work->artist }}</span>
+            </div>
         </div>
         @elseif($index % 5 === 1)
         <div class="work second-work" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}">
             <img src="{{ url('/storage') }}/{{ $work->image_path }}" style="height: 100%; width: 100%;">
+            <div class="d-flex flex-column align-items-center justify-content-center work-information">
+                <span class="work-text invisible animated fadeInUp">{{ $work->title }}</span>
+                <span class="work-text invisible animated fadeInUp">{{ $work->artist }}</span>
+            </div>
         </div>
         @elseif($index % 5 === 2)
         <div class="work third-work" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}">
             <img src="{{ url('/storage') }}/{{ $work->image_path }}" style="height: 100%; width: 100%;">
+            <div class="d-flex flex-column align-items-center justify-content-center work-information">
+                <span class="work-text invisible animated fadeInUp">{{ $work->title }}</span>
+                <span class="work-text invisible animated fadeInUp">{{ $work->artist }}</span>
+            </div>
         </div>
         @elseif($index % 5 === 3)
         <div class="work fourth-work" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}">
             <img src="{{ url('/storage') }}/{{ $work->image_path }}" style="height: 100%; width: 100%;">
+            <div class="d-flex flex-column align-items-center justify-content-center work-information">
+                <span class="work-text invisible animated fadeInUp">{{ $work->title }}</span>
+                <span class="work-text invisible animated fadeInUp">{{ $work->artist }}</span>
+            </div>
         </div>
         @elseif($index % 5 === 4)
         <div class="work fifth-work" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}">
             <img src="{{ url('/storage') }}/{{ $work->image_path }}" style="height: 100%; width: 100%;">
+            <div class="d-flex flex-column align-items-center justify-content-center work-information">
+                <span class="work-text invisible animated fadeInUp">{{ $work->title }}</span>
+                <span class="work-text invisible animated fadeInUp">{{ $work->artist }}</span>
+            </div>
         </div>
         @endif
     @endforeach

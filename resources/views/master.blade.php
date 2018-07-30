@@ -16,6 +16,7 @@
                 </div>
             </div>
         </div>
+        @include('partials.scroll-indicators')
         @include('scripts')
     </body>
 </html>

@@ -3,6 +3,10 @@
     src: url('/assets/png/kino.ttf');
 }
 
+.d-none {
+    display: none!important
+}
+
 .kino {
     font-family: kino;
 }
@@ -16,6 +20,58 @@
     bottom: 0;
     right: 0;
 }
+
+.no-padding-margin {
+    margin: 0;
+    padding: 0;
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+}
+
+.scroll-text {
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-align: center;
+    color: #6b6e75;
+}
+
+.scroll-text:hover {
+    text-decoration: none;
+    color: #6b6e75;
+}
+
+.scroll-arrow {
+    width: auto;
+    height: 5.5vh;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    40% {
+        -moz-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+        -webkit-transform: translateY(-3px);
+        transform: translateY(-3px);
+    }
+    60% {
+        -moz-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+        -webkit-transform: translateY(-3px);
+        transform: translateY(-3px);
+    }
+}
+
 
 /* Menu Overlay */
 .no-pointer-events {
@@ -38,24 +94,29 @@
 .menu-item {
     cursor: pointer;
     padding-bottom: 7px;
-    color: black;
+    color: #6b6e75;
 }
 
 
-.menu-item:hover {
+.menu-item:hover, .menu-item.active {
     text-decoration: none;
-    color: black;
+    color: #6b6e75;
     padding-bottom: 2px;
-    border-bottom: solid black 5px;
+    border-bottom: solid #6b6e75 5px;
+}
+
+/* ARROWS */
+.arrow-left, .arrow-right {
+    cursor: pointer;
 }
 
 /*  HOME */
 
 /* OVERLAY */
 .hover-information {
-    background-color: black;
+    background-color: white;
     z-index: 3;
-    color: white;
+    color: #6b6e75;
     text-transform: uppercase;
     font-size: 1.75em;
     text-align: center;
@@ -69,6 +130,18 @@
 }
 
 /* WORKS */
+.work-information {
+    height: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: white;
+    opacity: 0.75;
+    font-size: 1.5em;
+    color: #6b6e75;
+    transition: 0.5s;
+}
+
 .work, .artist {
     display: none;
 }
@@ -83,7 +156,7 @@
     bottom: 31%;
 }
 
-.second-work {
+.second-work, .second-artist {
     width: 12.75vw;
     height: 32vh;
     background-color: red;
@@ -93,7 +166,7 @@
     bottom: 31%;
 }
 
-.third-work {
+.third-work, .third-artist {
     width: 12.6vw;
     height: 32vh;
     background-color: red;
@@ -103,7 +176,7 @@
     bottom: 31%;
 }
 
-.fourth-work {
+.fourth-work, .fourth-artist {
     width: 12.6vw;
     height: 32vh;
     background-color: red;
@@ -113,7 +186,7 @@
     bottom: 31%;
 }
 
-.fifth-work {
+.fifth-work, .fifth-artist {
     width: 12.6vw;
     height: 32vh;
     background-color: red;
@@ -124,9 +197,36 @@
 }
 
 /* HALL OF FAME */
+.polaroid-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.artist-name {
+    color: #6b6e75;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5em;
+    padding-left: 10px;
+    line-height: 100%;
+    padding-right: 10px;
+}
+
+.thumbnail {
+    position: absolute;
+    top: 10%;
+    height: 63%;
+    width: 74%;
+    background-color: red;
+}
 
 /* CONTACT */
 .contact-container {
+    font-size: 2.5em;
+    color: #6b6e75;
     z-index: 2;
     height: 31vh;
     width: 30.5vw;

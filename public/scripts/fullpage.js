@@ -28,6 +28,7 @@ var animations      = [slideInLeft, slideInRight, slideInUp, slideInDown, fadeIn
 //on page load function (waits till the whole page is loaded)
 window.onload = function(){
       window.document.body.onload = loaded(); // note removed parentheses
+      styleNavigationTooltips();
 };
 
 //initiate fullpage scrolling and reveal sections
@@ -96,20 +97,71 @@ function loaded(){
             hideScrollIndicator();
         },
         afterLoad: function(anchorLink, index){
-            if(anchorLink === 'gallerij' && !initialWorksRevealed){
-                revealWorks('next');
+            setActiveMenuItem(anchorLink);
+            if(anchorLink === 'micksart'){
+                revealScrollIndicator('scroll-gallerij');
             }
-            if(anchorLink === 'hall-of-fame' && !initialArtistsRevealed){
-                revealWorks('next');
+            if(anchorLink === 'gallerij'){
+                if(!initialWorksRevealed){
+                    revealWorks('next');
+                }
+                revealScrollIndicator('scroll-hall-of-fame');
+            }
+            if(anchorLink === 'hall-of-fame'){
+                if(!initialArtistsRevealed){
+                    revealArtists('next');
+                }
+                revealScrollIndicator('scroll-contact');
             }
         }
     });
 }
 
+// give the nav tips on the right the colors matching the design.
+function styleNavigationTooltips(){
+
+    $( '#fp-nav > ul > li > a[href*="#micksart"] > span').css('background', '#e30b1a');
+    $( '#fp-nav > ul > li > a[href*="#micksart"]').next().css('color', '#e30b1a');
+
+    $( '#fp-nav > ul > li > a[href*="#gallerij"] > span' ).css('background', '#1d4354');
+    $( '#fp-nav > ul > li > a[href*="#gallerij"]').next().css('color', '#1d4354');
+
+    $( '#fp-nav > ul > li > a[href*="#hall-of-fame"] > span' ).css('background', '#bbc173');
+    $( '#fp-nav > ul > li > a[href*="#hall-of-fame"]').next().css('color', '#bbc173');
+
+    $( '#fp-nav > ul > li > a[href*="#contact"] > span' ).css('background', '#118bcc');
+    $( '#fp-nav > ul > li > a[href*="#contact"]').next().css('color', '#118bcc');
+
+}
+
+function hideScrollIndicator(){
+    $('.scroll-indicator').not(hidden).addClass(hidden);
+}
+
+var scrollText = ' > .scroll-text';
+var scrollArrow = ' > .scroll-arrow';
+var scrollIndicator = '.scroll-indicator';
+function revealScrollIndicator(section) {
+    var section = '.' + section;
+    $(scrollIndicator + section).removeClass(hidden);
+    playSectionBounceIntro(section);
+}
+
+function playSectionBounceIntro(section){
+    setTimeout(function(){
+        $(scrollIndicator + section + scrollText).removeClass(fadeIn).addClass(bounce);
+        $(scrollIndicator + section + scrollArrow).removeClass(fadeInUp).addClass(bounce);
+    }, 1500);
+}
+// menu item
+function setActiveMenuItem(anchorLink){
+    $('.menu-item').removeClass('active');
+    $('.' + anchorLink).addClass('active');
+}
+
 $('.arrow-left, .arrow-right').on('click', function(){
     var direction = $(this).data('direction');
     var currentPage = $(this).data('page');
-
     if(currentPage === 'works'){
         revealWorks(direction);
     } else {
@@ -121,7 +173,6 @@ $('.arrow-left, .arrow-right').on('click', function(){
 var worksIndex = 0;
 var works = document.getElementsByClassName('first-work').length;
 var initialWorksRevealed = false;
-
 function revealWorks(direction){
     if(initialWorksRevealed){
         console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
@@ -145,7 +196,6 @@ function revealWorks(direction){
 var artistsIndex = 0;
 var artists = document.getElementsByClassName('first-artist').length;
 var initialArtistsRevealed = false;
-
 function revealArtists(direction){
     if(initialArtistsRevealed){
         console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
@@ -180,24 +230,19 @@ function toggleArtists(){
     $(document.getElementsByClassName("second-artist")[artistsIndex]).toggle();
     $(document.getElementsByClassName("third-artist")[artistsIndex]).toggle();
     $(document.getElementsByClassName("fourth-artist")[artistsIndex]).toggle();
-    $(document.getElementsByClassName("fifth-fifth")[artistsIndex]).toggle();
+    $(document.getElementsByClassName("fifth-artist")[artistsIndex]).toggle();
 }
 
 // DISPLAY WORK OR ARIST INFORMATION
-$('.work').on('mouseenter', function(){
-    setHoverInformation(this);
-});
-
-$('.artist').on('mouseenter', function(){
-    setHoverInformation(this);
-});
-
-$('.work').on('mouseout', function() {
-    animate('hover-information', 'fadeOut', 'fadeIn');
-});
-
-$('.artist').on('mouseout', function() {
-    animate('hover-information', 'fadeOut', 'fadeIn');
+$('.work').hover(function(){
+    var element = this;
+    $(element).find('.work-information').css('height', '50%');
+    setTimeout(function(){
+        $(element).find('.work-information').find('.work-text').removeClass('d-none');
+    }, 500);
+}, function(){
+    $(this).find('.work-information').css('height', '0%');
+    $(this).find('.work-information').find('.work-text').addClass('d-none');
 });
 
 //set hover box information
@@ -205,34 +250,13 @@ function setHoverInformation(element){
     var container = $('.hover-information');
     if($(element).data('title')){
         $('.title').text($(element).data('title'));
-        $('.artist').text($(element).data('artist'));
+        $('.name').text($(element).data('artist'));
     }
-    else {
-        $('.title').text($(element).data('artist'));
-    }
+    // else {
+    //     $('.title').text($(element).data('artist'));
+    //     $('.name').text('');
+    // }
     animate('hover-information', 'fadeIn', 'invisible fadeOut');
-}
-
-
-function hideScrollIndicator(){
-    $('.scroll-indicator').not(hidden).addClass(hidden);
-}
-
-var scrollText = ' > .scroll-text';
-var scrollArrow = ' > .scroll-arrow';
-var scrollIndicator = '.scroll-indicator';
-
-function revealScrollIndicator(section) {
-    var section = '.' + section;
-    $(scrollIndicator + section).removeClass(hidden);
-    playSectionBounceIntro(section);
-}
-
-function playSectionBounceIntro(section){
-    setTimeout(function(){
-        $(scrollIndicator + section + scrollText).removeClass(fadeIn).addClass(bounce);
-        $(scrollIndicator + section + scrollArrow).removeClass(fadeInUp).addClass(bounce);
-    }, 1500);
 }
 
 // MENU OVERLAY ON/OFF
