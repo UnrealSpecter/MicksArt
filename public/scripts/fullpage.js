@@ -28,6 +28,10 @@ var animations      = [slideInLeft, slideInRight, slideInUp, slideInDown, fadeIn
 //on page load function (waits till the whole page is loaded)
 window.onload = function(){
     window.document.body.onload = loaded(); // note removed parentheses
+    //if ismobile remove 300ms delay by using hammer events else just use the standard tooltips
+    if(isMobile()){
+        initMobileAccelleration();
+    }
     styleNavigationTooltips();
 };
 
@@ -38,13 +42,43 @@ window.isMobile = function() {
     return check;
 };
 
-// init mobile
 function initMobileAccelleration() {
+
+    $('.work').hammer().bind("tap", function(ev) {
+        var workHidden = $($(ev.currentTarget).children().children()[0]).hasClass('d-none');
+        if(workHidden){
+            showOrHideWorkInformation(ev.currentTarget, 'reveal');
+        }
+        else {
+            showOrHideWorkInformation(ev.currentTarget, 'hide');
+        }
+    });
 
 }
 
 //initiate fullpage scrolling and reveal sections
 function loaded(){
+
+    // Listen for orientation changes
+    window.addEventListener("orientationchange", function() {
+        // Announce the new orientation number
+        // alert(window.orientation);
+        var url = window.location.href;
+        var hash = url.substring(url.indexOf("#")+1);
+
+        if(window.orientation === 90 && hash === 'gallerij' && !initialWorksRevealed){
+            revealDesktopWorks('next');
+        }
+        if(window.orientation === 0 && hash === 'gallerij' && !initialMobileWorkRevealed){
+            revealMobileWorks('next');
+        }
+        if(window.orientation === 90 && hash === 'hall-of-fame' && !initialArtistsRevealed){
+            revealDesktopArtists('next');
+        }
+        if(window.orientation === 0 && hash === 'hall-of-fame' && !initialMobileArtistRevealed){
+            revealMobileArtists('next');
+        }
+    }, false);
 
     $('.section, .active').removeClass('d-none').addClass('animated fadeIn');
     $('.section').removeClass('d-none').addClass('animated fadeIn');
@@ -114,18 +148,37 @@ function loaded(){
             }
             if(anchorLink === 'gallerij'){
                 if(!initialWorksRevealed){
-                    revealWorks('next');
+                    if (window.matchMedia("(orientation: landscape)").matches) {
+                        revealDesktopWorks('next');
+                    }
+                }
+                if(!initialMobileWorkRevealed){
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        revealMobileWorks('next');
+                    }
                 }
                 revealScrollIndicatorAndArrows('scroll-hall-of-fame');
             }
             if(anchorLink === 'hall-of-fame'){
                 if(!initialArtistsRevealed){
-                    revealArtists('next');
+                    if (window.matchMedia("(orientation: landscape)").matches) {
+                        revealDesktopArtists('next');
+                    }
+                }
+                if(!initialMobileArtistRevealed){
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        revealMobileArtists('next');
+                    }
                 }
                 revealScrollIndicatorAndArrows('scroll-contact');
             }
         }
     });
+
+    //hide nav on mobile and show only on desktop
+    if(window.innerWidth < 1200){
+        $('#fp-nav').addClass('d-none');
+    }
 }
 
 // give the nav tips on the right the colors matching the design.
@@ -162,7 +215,7 @@ function revealScrollIndicatorAndArrows(section) {
 
 function playSectionBounceIntro(section){
     setTimeout(function(){
-        console.log($(section + ' > a'+ scrollArrow));
+        // console.log($(section + ' > a'+ scrollArrow));
         $(section + ' > a'+ scrollArrow).removeClass(fadeInUp).addClass(bounce).addClass('animated-slow');
     }, 1500);
 }
@@ -176,9 +229,19 @@ $('.arrow-left, .arrow-right').on('click', function(){
     var direction = $(this).data('direction');
     var currentPage = $(this).data('page');
     if(currentPage === 'works'){
-        revealWorks(direction);
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            revealDesktopWorks(direction);
+        }
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            revealMobileWorks(direction);
+        }
     } else {
-        revealArtists(direction);
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            revealDesktopArtists(direction);
+        }
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            revealMobileArtists(direction);
+        }
     }
 });
 
@@ -186,9 +249,9 @@ $('.arrow-left, .arrow-right').on('click', function(){
 var worksIndex = 0;
 var works = document.getElementsByClassName('first-work').length;
 var initialWorksRevealed = false;
-function revealWorks(direction){
+function revealDesktopWorks(direction){
     if(initialWorksRevealed){
-        console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
+        // console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
         if(direction === 'next' && (worksIndex < (works - 1))){
             toggleWorks();
             worksIndex++;
@@ -206,12 +269,58 @@ function revealWorks(direction){
     }
 }
 
+var mobileWorksIndex = 0;
+var mobileWorks = document.getElementsByClassName('mobile-work').length;
+var initialMobileWorkRevealed = false;
+function revealMobileWorks(direction){
+    if(initialMobileWorkRevealed){
+        // console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
+        if(direction === 'next' && (mobileWorksIndex < (mobileWorks - 1))){
+            toggleMobileWork();
+            mobileWorksIndex++;
+            toggleMobileWork();
+        }
+        if(direction === 'previous' && mobileWorksIndex >= 1){
+            toggleMobileWork();
+            mobileWorksIndex--;
+            toggleMobileWork();
+        }
+    }
+    else {
+        toggleMobileWork();
+        initialMobileWorkRevealed = true;
+    }
+}
+
+var mobileArtistsIndex = 0;
+var mobileArtists = document.getElementsByClassName('mobile-artist').length;
+var initialMobileArtistRevealed = false;
+function revealMobileArtists(direction){
+    if(initialMobileArtistRevealed){
+        // console.log('amount of works: ', works, 'worksIndex: ', worksIndex, 'direction: ', direction);
+        if(direction === 'next' && (mobileArtistsIndex < (mobileArtists - 1))){
+            toggleMobileArtist();
+            mobileArtistsIndex++;
+            toggleMobileArtist();
+        }
+        if(direction === 'previous' && mobileArtistsIndex >= 1){
+            toggleMobileArtist();
+            mobileArtistsIndex--;
+            toggleMobileArtist();
+        }
+    }
+    else {
+        toggleMobileArtist();
+        initialMobileArtistRevealed = true;
+    }
+}
+
 var artistsIndex = 0;
 var artists = document.getElementsByClassName('first-artist').length;
 var initialArtistsRevealed = false;
-function revealArtists(direction){
+function revealDesktopArtists(direction){
     if(initialArtistsRevealed){
-        console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
+        // console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
         if(direction === 'next' && (artistsIndex < (artists - 1))){
             toggleArtists();
             artistsIndex++;
@@ -224,10 +333,17 @@ function revealArtists(direction){
         }
     }
     else {
-        console.log('initial');
         toggleArtists();
         initialArtistsRevealed = true;
     }
+}
+
+function toggleMobileWork(){
+    $(document.getElementsByClassName("mobile-work")[mobileWorksIndex]).toggle();
+}
+
+function toggleMobileArtist(){
+    $(document.getElementsByClassName("mobile-artist")[mobileArtistsIndex]).toggle();
 }
 
 function toggleWorks(){
@@ -248,13 +364,22 @@ function toggleArtists(){
 
 // DISPLAY WORK OR ARIST INFORMATION
 $('.work').hover(function(){
-    var element = this;
-    $(element).find('.work-information').css('height', '50%');
-    $(element).find('.work-information').find('.work-text').removeClass('d-none');
+    showOrHideWorkInformation(this, 'reveal');
 }, function(){
-    $(this).find('.work-information').css('height', '0%');
-    $(this).find('.work-information').find('.work-text').addClass('d-none');
+    showOrHideWorkInformation(this, 'hide');
 });
+
+function showOrHideWorkInformation(element, animation){
+    // console.log(element);
+    if(animation === 'reveal'){
+        $(element).find('.work-information').css('height', '50%');
+        $(element).find('.work-information').find('.work-text').removeClass('d-none');
+    }
+    if(animation === 'hide'){
+        $(element).find('.work-information').css('height', '0%');
+        $(element).find('.work-information').find('.work-text').addClass('d-none');
+    }
+}
 
 // MENU OVERLAY ON/OFF
 function on() {
