@@ -6,4 +6,4 @@
     <meta name="google-site-verification" content="Ixs80Wgh0THrxCpxmDzvn8BZnlw2NT_lLXwHPPDCnPg" />
     <link rel="icon" type="image/png" href="{{ asset('/assets/png/logo.png') }}">
 
-    <title>@yield('title')</title>
+    <title>MicksArt</title>
