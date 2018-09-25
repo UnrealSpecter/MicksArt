@@ -1,3 +1,5 @@
+@section('title')MicksArt@endsection
+
 @section('additional-styles')
 @endsection
 
