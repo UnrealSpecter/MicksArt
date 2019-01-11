@@ -10,8 +10,9 @@
             <p>{{ $contact->phone_number }}</p>
         @endforeach
     </div>
+
     <a class="col-6 col-sm-2 col-md-6 col-lg-2 no-padding-margin d-flex align-items-center justify-content-center" href="{{ $contacts[0]->facebook_url }}" style="position: absolute; bottom: 0;">
-        <img class="img-fluid no-padding-margin" src="{{ asset('/assets/png/facebook.png') }}" alt="facebook_button" >
+        <img class="img-fluid no-padding-margin" src="{{ asset('/assets/png/facebook.png') }}" alt="facebook_button">
     </a>
 
 </div>

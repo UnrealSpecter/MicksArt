@@ -6,7 +6,7 @@
     </head>
     <body>
         <!-- start of the page content -->
-        <img class="menu col-2 col-sm-1 col-md-2 col-lg-1 col-xl-1 no-padding-margin" src="{{ asset('/assets/png/menu.svg') }}" onclick="on()">
+        <img class="menu col-2 col-sm-1 col-md-2 col-lg-1 col-xl-1 no-padding-margin" src="{{ asset('/assets/png/menu.png') }}" onclick="on()">
         @include('partials.hover-information')
         @include('partials.menu-overlay')
         <div class="container-fluid">

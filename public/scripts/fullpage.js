@@ -372,7 +372,7 @@ $('.work').hover(function(){
 function showOrHideWorkInformation(element, animation){
     // console.log(element);
     if(animation === 'reveal'){
-        $(element).find('.work-information').css('height', '50%');
+        $(element).find('.work-information').css('height', '100%');
         $(element).find('.work-information').find('.work-text').removeClass('d-none');
     }
     if(animation === 'hide'){

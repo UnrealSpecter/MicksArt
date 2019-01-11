@@ -191,6 +191,7 @@
     font-size: 1.5em;
     color: #6b6e75;
     transition: 0.5s;
+    padding: 30px;
 }
 
 .work, .artist {
