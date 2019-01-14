@@ -139,6 +139,15 @@
     border-bottom: solid #6b6e75 5px;
 }
 
+.close-button {
+    font-size: 2.25em;
+    position: absolute;
+    margin: 5px 30px 0 0;
+    color: #6b6e75;
+    top: 0;
+    right: 0;
+}
+
 /* ARROWS */
 .arrow-left, .arrow-right {
     cursor: pointer;
@@ -235,6 +244,18 @@
     bottom: 31%;
 }
 
+.work-text {
+    font-size: 1.25em;
+    border-bottom: 2px solid gray;
+    padding-bottom: 10px;
+}
+
+.work-text-description {
+    font-size: 1em;
+    margin-top: 5px;
+    line-height: 110%;
+}
+
 /* HALL OF FAME */
 .polaroid-frame {
     position: absolute;
@@ -293,6 +314,16 @@
     .menu-decoration {
         width: 50%;
     }
+
+    .close-button {
+        font-size: 2em;
+        position: absolute;
+        margin: 10px 30px 0 0;
+        color: #6b6e75;
+        top: 0;
+        right: 0;
+    }
+
     .contact-container {
         font-size: 1.25em;
     }
@@ -337,6 +368,14 @@
     .menu-decoration {
         width: 65%;
     }
+    .close-button {
+        font-size: 2em;
+        position: absolute;
+        margin: 10px 50px 0 0;
+        color: #6b6e75;
+        top: 0;
+        right: 0;
+    }
     .contact-container {
         font-size: 3em;
     }
@@ -370,6 +409,9 @@
     }
     .menu-decoration {
         width: 50%;
+    }
+    .close-button {
+        margin: 0 50px 0 0;
     }
     .contact-container {
         font-size: 2em;
@@ -431,6 +473,10 @@
     }
     .menu-decoration {
         width: 25%;
+    }
+    .close-button {
+        font-size: 2.5em;
+        margin: 0 65px 0 0;
     }
     .contact-container {
         font-size: 2.75em;

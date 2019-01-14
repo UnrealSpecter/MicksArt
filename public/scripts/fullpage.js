@@ -147,29 +147,48 @@ function loaded(){
                 revealScrollIndicatorAndArrows('scroll-gallerij');
             }
             if(anchorLink === 'gallerij'){
+
+                // SHOW EXPLANATION TOOLTIPS
+                showExplanationToast();
+
+                // SHOW THE WORKS DESKTOP
                 if(!initialWorksRevealed){
                     if (window.matchMedia("(orientation: landscape)").matches) {
                         revealDesktopWorks('next');
                     }
                 }
+
+                // SHOW THE MOBILE VERSION OF THE WORKS
                 if(!initialMobileWorkRevealed){
                     if (window.matchMedia("(orientation: portrait)").matches) {
                         revealMobileWorks('next');
                     }
                 }
+
+                // REVEAL SCROLL INDICATOR
                 revealScrollIndicatorAndArrows('scroll-hall-of-fame');
+
             }
             if(anchorLink === 'hall-of-fame'){
+
+                // SHOW EXPLANATION TOOLTIPS
+                showExplanationToast();
+
+                // SHOW ARTISTS
                 if(!initialArtistsRevealed){
                     if (window.matchMedia("(orientation: landscape)").matches) {
                         revealDesktopArtists('next');
                     }
                 }
+
+                // SHOW ARTISTS MOBILE
                 if(!initialMobileArtistRevealed){
                     if (window.matchMedia("(orientation: portrait)").matches) {
                         revealMobileArtists('next');
                     }
                 }
+
+                // REVEAL SCROLL INDICATORS
                 revealScrollIndicatorAndArrows('scroll-contact');
             }
         }
@@ -374,10 +393,12 @@ function showOrHideWorkInformation(element, animation){
     if(animation === 'reveal'){
         $(element).find('.work-information').css('height', '100%');
         $(element).find('.work-information').find('.work-text').removeClass('d-none');
+        $(element).find('.work-information').find('.work-text-description').removeClass('d-none');
     }
     if(animation === 'hide'){
         $(element).find('.work-information').css('height', '0%');
         $(element).find('.work-information').find('.work-text').addClass('d-none');
+        $(element).find('.work-information').find('.work-text-description').addClass('d-none');
     }
 }
 
@@ -401,4 +422,34 @@ function animate(element, animationToAdd, animationToRemove, delay) {
     //on the elment remove the desired animation that needs to be removed and add the new one
     $('.' + element).removeClass(animationToRemove).addClass(animationToAdd);
 
+}
+
+var shownExplanation = false;
+function showExplanationToast(){
+    if(!shownExplanation){
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": 'toast-top-center',
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        toastr["info"]("Tap de pijltjes om te navigereren tussen de werken. Tap het kunstwerk om meer informatie te zien.");
+
+
+
+        shownExplanation = true;
+    }
 }
