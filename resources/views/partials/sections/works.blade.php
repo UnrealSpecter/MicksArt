@@ -1,6 +1,6 @@
 <div class="section-wrapper d-flex flex-row justify-content-center align-items-center">
     <h1 class="kino title">Gallery</h1>
-    <img data-page="works" class="arrow-left img-fluid animated fadeInLeft d-none" src="{{ asset('/assets/png/arrow-left.svg') }}" data-direction="previous" alt="previous">
+    <img data-page="works" class="arrow-left invisible img-fluid animated fadeInLeft d-none" src="{{ asset('/assets/png/arrow-left.svg') }}" data-direction="previous" alt="previous">
     @foreach($works as $index => $work)
         <div class="work mobile-work animated fadeIn mobile" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}" style="position: absolute;">
             <div class="d-flex flex-column align-items-center justify-content-center work-information text-center" style="z-index: 2;">
