@@ -28,6 +28,7 @@ var animations      = [slideInLeft, slideInRight, slideInUp, slideInDown, fadeIn
 
 //on page load function (waits till the whole page is loaded)
 window.onload = function(){
+
     window.document.body.onload = loaded(); // note removed parentheses
     //if ismobile remove 300ms delay by using hammer events else just use the standard tooltips
     if(isMobile()){
@@ -45,6 +46,7 @@ window.isMobile = function() {
 
 function initMobileAccelleration() {
 
+    //initiate hammer events
     $('.work').hammer().bind("tap", function(ev) {
         var workHidden = $($(ev.currentTarget).children().children()[0]).hasClass('d-none');
         if(workHidden){
@@ -90,7 +92,7 @@ function loaded(){
         menu: '#menu',
         lockAnchors: false,
         anchors:['micksart', 'gallerij', 'hall-of-fame', 'contact'],
-        navigation: true,
+        navigation: false,
         navigationPosition: 'right',
         navigationTooltips: ['micksart', 'gallerij', 'hall-of-fame', 'contact'],
         showActiveTooltip: false,
@@ -199,10 +201,6 @@ function loaded(){
         }
     });
 
-    //hide nav on mobile and show only on desktop
-    if(window.innerWidth < 1200){
-        $('#fp-nav').addClass('d-none');
-    }
 }
 
 // give the nav tips on the right the colors matching the design.
@@ -431,12 +429,12 @@ $('.work').hover(function(){
 function showOrHideWorkInformation(element, animation){
     // console.log(element);
     if(animation === 'reveal'){
-        $(element).find('.work-information').css('height', '100%');
+        $(element).find('.work-information').addClass('revealed-work').removeClass('hidden-work');
         $(element).find('.work-information').find('.work-text').removeClass('d-none');
         $(element).find('.work-information').find('.work-text-description').removeClass('d-none');
     }
     if(animation === 'hide'){
-        $(element).find('.work-information').css('height', '0%');
+        $(element).find('.work-information').addClass('hidden-work').removeClass('revealed-work');
         $(element).find('.work-information').find('.work-text').addClass('d-none');
         $(element).find('.work-information').find('.work-text-description').addClass('d-none');
     }

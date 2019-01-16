@@ -22,6 +22,7 @@
         display: none !important;
     }
 }
+
 .background {
     position: absolute;
     height: 100vh;
@@ -119,7 +120,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(255,255,255,1);
-    z-index: 2;
+    z-index: 1000000;
     color: black;
     font-size: 1.5em;
     font-weight: bold;
@@ -191,7 +192,6 @@
 
 /* WORKS */
 .work-information {
-    height: 0;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -200,13 +200,22 @@
     font-size: 1.5em;
     color: #6b6e75;
     transition: 0.5s;
+}
+
+.hidden-work {
+    height: 0;
+    padding: 0;
+}
+
+.revealed-work {
+    height: 100%;
     padding: 30px;
 }
 
 .work, .artist {
     display: none;
-    width: 50vw;
-    height: 40vh;
+    width: 57.5vw;
+    height: 50vh;
 }
 
 .first-work, .first-artist {
@@ -272,7 +281,7 @@
     font-size: 1.5em;
     line-height: 100%;
     height: 27.5%;
-    padding: 10px;
+    padding: 20px;
 }
 
 .thumbnail {
@@ -335,6 +344,7 @@
         width: 13vw;
         height: 28vh;
     }
+
     .scroll-text {
         font-size: 1.75em;
     }
@@ -387,8 +397,19 @@
         font-size: 2.1em;
     }
     .work, .artist {
-        width: 37.5vw;
-        height: 40vh;
+        display: none;
+        width: 48vw;
+        height: 48vh;
+    }
+    .work-text {
+        font-size: 2em;
+        border-bottom: 2px solid gray;
+        padding-bottom: 10px;
+    }
+    .work-text-description {
+        font-size: 1.75em;
+        margin-top: 10px;
+        line-height: 110%;
     }
     .artist-name {
         font-size: 2em;
@@ -397,6 +418,17 @@
     .title {
         top: 4%;
         font-size: 3em;
+    }
+    .arrow-left, .arrow-right {
+        width: 60px;
+    }
+
+    .arrow-right {
+        right: 4%;
+    }
+
+    .arrow-left {
+        left: 4%;
     }
 }
 
@@ -455,12 +487,33 @@
         width: 13vw;
         height: 31vh;
     }
+    .work-text {
+        font-size: 1.25em;
+        border-bottom: 2px solid gray;
+        padding-bottom: 10px;
+    }
+    .work-text-description {
+        font-size: 1em;
+        margin-top: 10px;
+        line-height: 110%;
+    }
     .scroll-text {
         font-size: 2em;
     }
     .title {
         top: 4%;
         font-size: 3em;
+    }
+    .arrow-left, .arrow-right {
+        width: 50px;
+    }
+
+    .arrow-right {
+        right: 3%;
+    }
+
+    .arrow-left {
+        left: 3%;
     }
 }
 
@@ -489,16 +542,34 @@
         width: 13vw;
         height: 32vh;
     }
-    .arrow-left, .arrow-right {
-        width: 4.5%;
+    .work-text {
+        font-size: 1.5em;
+        border-bottom: 2px solid gray;
+        padding-bottom: 10px;
     }
+    .work-text-description {
+        font-size: 1.25em;
+        margin-top: 10px;
+        line-height: 110%;
+    }
+    .arrow-left, .arrow-right {
+        width: 60px;
+    }
+    .arrow-right {
+        right: 3%;
+    }
+
+    .arrow-left {
+        left: 3%;
+    }
+    
     .scroll-text {
         font-size: 2.4em;
     }
     .artist-name {
-        font-size: 1.5em;
-        padding-left: 10px;
-        padding-right: 10px;
+        font-size: 1.75em;
+        padding-left: 25px;
+        padding-right: 25px;
     }
     .title {
       font-size: 3em;

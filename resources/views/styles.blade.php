@@ -7,6 +7,7 @@
 
     <!-- partials css -->
     <link rel="stylesheet" href="{{ asset('/styles/micksart-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/styles/landscape-indicator.css') }}" />
 
     <!-- per page additional css -->
     @yield('additional-styles')

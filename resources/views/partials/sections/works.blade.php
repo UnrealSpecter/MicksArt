@@ -3,7 +3,7 @@
     <img data-page="works" class="arrow-left invisible img-fluid animated fadeInLeft d-none" src="{{ asset('/assets/png/arrow-left.svg') }}" data-direction="previous" alt="previous">
     @foreach($works as $index => $work)
         <div class="work mobile-work animated fadeIn mobile" data-artist="{{ $work->artist }}" data-title="{{ $work->title }}" style="position: absolute;">
-            <div class="d-flex flex-column align-items-center justify-content-center work-information text-center" style="z-index: 2;">
+            <div class="work-information hidden-work d-flex flex-column align-items-center justify-content-center text-center" style="z-index: 2;">
                 <span class="work-text animated fadeInUp d-none kino">{{ $work->title }}</span>
                 <span class="work-text-description animated fadeInUp d-none kino">{{ $work->artist }}</span>
             </div>
