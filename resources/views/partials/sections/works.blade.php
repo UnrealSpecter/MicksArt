@@ -69,7 +69,7 @@
         </div>
         @endif
     @endforeach
-    <img data-page="works" class="arrow-right img-fluid animated fadeInRight d-none" src="{{ asset('/assets/png/arrow-right.svg') }}" data-direction="next" alt="previous">
+    <img data-page="works" class="arrow-right img-fluid animated fadeInRight d-none works-arrow" src="{{ asset('/assets/png/arrow-right.svg') }}" data-direction="next" alt="previous">
     <img class="background desktop" src="{{ asset('/assets/png/works.png')}}">
 
 </div>

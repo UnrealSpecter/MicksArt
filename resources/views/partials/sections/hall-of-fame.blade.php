@@ -52,6 +52,6 @@
         </a>
         @endif
     @endforeach
-    <img class="arrow-right img-fluid animated fadeInRight d-none" src="{{ asset('/assets/png/arrow-right.svg') }}" data-page="hall-of-fame" data-direction="next" alt="previous">
+    <img class="arrow-right img-fluid animated fadeInRight d-none artists-arrow" src="{{ asset('/assets/png/arrow-right.svg') }}" data-page="hall-of-fame" data-direction="next" alt="previous">
 
 </div>

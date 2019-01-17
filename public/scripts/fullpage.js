@@ -201,6 +201,8 @@ function loaded(){
         }
     });
 
+    checkIfNavigationArrowsNeedToBeHiddenAndHide();
+
 }
 
 // give the nav tips on the right the colors matching the design.
@@ -220,6 +222,7 @@ function styleNavigationTooltips(){
 
 }
 
+//
 function hideScrollIndicatorAndScrollArrows(){
     $('.scroll-indicator').not(hidden).addClass(hidden).removeClass('animated-slow').addClass('animated');
     $('.arrow-left, .arrow-right').not(hidden).addClass(hidden);
@@ -280,18 +283,19 @@ function revealDesktopWorks(direction){
             toggleWorks();
             worksIndex++;
             toggleWorks();
-            hideNavigationArrows(mobileArtistsIndex, mobileArtists, page);
+            hideNavigationArrows(worksIndex, works, page);
         }
         if(direction === 'previous' && worksIndex >= 1){
             toggleWorks();
             worksIndex--;
             toggleWorks();
-            hideNavigationArrows(mobileArtistsIndex, mobileArtists, page);
+            hideNavigationArrows(worksIndex, works, page);
         }
     }
     else {
         toggleWorks();
         initialWorksRevealed = true;
+        // checkIfNavigationArrowsNeedToBeHiddenAndHide();
     }
 }
 
@@ -317,6 +321,7 @@ function revealMobileWorks(direction){
     else {
         toggleMobileWork();
         initialMobileWorkRevealed = true;
+        // checkIfNavigationArrowsNeedToBeHiddenAndHide();
     }
 }
 
@@ -342,16 +347,46 @@ function revealMobileArtists(direction){
     else {
         toggleMobileArtist();
         initialMobileArtistRevealed = true;
+        // checkIfNavigationArrowsNeedToBeHiddenAndHide();
+    }
+}
+
+var artistsIndex = 0;
+var artists = document.getElementsByClassName('first-artist').length;
+var initialArtistsRevealed = false;
+function revealDesktopArtists(direction){
+    if(initialArtistsRevealed){
+        // console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
+        if(direction === 'next' && (artistsIndex < (artists - 1))){
+            toggleArtists();
+            artistsIndex++;
+            toggleArtists();
+            hideNavigationArrows(artistsIndex, artists, page);
+        }
+        if(direction === 'previous' && artistsIndex >= 1){
+            toggleArtists();
+            artistsIndex--;
+            toggleArtists();
+            hideNavigationArrows(artistsIndex, artists, page);
+        }
+    }
+    else {
+        toggleArtists();
+        initialArtistsRevealed = true;
+        // checkIfNavigationArrowsNeedToBeHiddenAndHide();
     }
 }
 
 // HIDE NAV ARROWS
+// these are different than the indexes. these are used soley for this function.
+var totalArtists = document.getElementsByClassName('desktop artist').length;
+var totalWorks = document.getElementsByClassName('desktop work').length;
 function hideNavigationArrows(index, items, page){
-    console.log(index, items, page);
+
+    console.log('index: ' + index + ' totalItems: ' + items + ' page: ' + page);
 
     // hide last arrow
     if(index === (items - 1)){
-
         $('*[data-page='+ page +'][data-direction="next"]').addClass('invisible');
     }
 
@@ -372,26 +407,25 @@ function hideNavigationArrows(index, items, page){
 
 }
 
-var artistsIndex = 0;
-var artists = document.getElementsByClassName('first-artist').length;
-var initialArtistsRevealed = false;
-function revealDesktopArtists(direction){
-    if(initialArtistsRevealed){
-        // console.log('amount of artists: ', artists, 'artistsIndex: ', artistsIndex, 'direction: ', direction);
-        if(direction === 'next' && (artistsIndex < (artists - 1))){
-            toggleArtists();
-            artistsIndex++;
-            toggleArtists();
-        }
-        if(direction === 'previous' && artistsIndex >= 1){
-            toggleArtists();
-            artistsIndex--;
-            toggleArtists();
-        }
+function checkIfNavigationArrowsNeedToBeHiddenAndHide() {
+    // hide nav arrows for certain situations
+    console.log('works: ' + totalWorks + ' artists: ' + totalArtists);
+    if($(window).width() >= 768 && totalWorks <= 5){
+        console.log('desktop works');
+        console.log($('.arrow-right.works-arrow').attr('class'));
+        $('.arrow-right.works-arrow').addClass('invisible');
     }
-    else {
-        toggleArtists();
-        initialArtistsRevealed = true;
+    if($(window).width() >= 768 && totalArtists <= 5){
+        console.log(totalArtists);
+        $('.arrow-right.artists-arrow').addClass('invisible');
+    }
+    if($(window).width() < 768 && totalWorks <= 1){
+        console.log('mobile works');
+        $('.arrow-right.works-arrow').addClass('invisible');
+    }
+    if($(window).width() < 768 && totalArtists <= 1){
+        console.log('mobile artists');
+        $('.arrow-right.artists-arrow').addClass('invisible');
     }
 }
 
